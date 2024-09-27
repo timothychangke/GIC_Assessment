@@ -1,4 +1,4 @@
-import { EMPLOYEE_ID_LENGTH } from '../config/constants';
+import { EMPLOYEE_ID_LENGTH } from '../config/constants.js';
 
 const generateCustomId = () => {
   const randomIndexLength = EMPLOYEE_ID_LENGTH - 2;
@@ -12,4 +12,4 @@ const generateCustomId = () => {
   return result;
 };
 
-export default generateCustomId
+export default generateCustomId;

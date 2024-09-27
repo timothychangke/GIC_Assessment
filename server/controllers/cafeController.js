@@ -1,4 +1,4 @@
-import Cafe from '../models/Cafe';
+import Cafe from '../models/Cafe.js';
 
 export const getCafesByLocation = async (req, res) => {
   const { location } = req.query;

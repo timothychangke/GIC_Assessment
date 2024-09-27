@@ -1,5 +1,5 @@
-import Employee from '../models/Employee';
-import Cafe from '../models/Cafe';
+import Employee from '../models/Employee.js';
+import Cafe from '../models/Cafe.js';
 import calculateDaysWorked from '../helpers/calculateDaysWorked.js';
 
 export const getEmployeesByCafe = async (req, res) => {

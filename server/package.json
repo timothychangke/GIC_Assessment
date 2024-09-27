@@ -5,8 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "test": "jest --watchAll"
+    "start": "nodemon server.js",
+    "test": "jest --watchAll", 
+    "seed": "node seeders/seed.js"
   },
   "keywords": [],
   "author": "",

@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import generateCustomId from '../helpers/generateCustomId';
+import generateCustomId from '../helpers/generateCustomId.js';
 
 const employeeSchema = new mongoose.Schema({
   id: {
@@ -42,10 +42,8 @@ const employeeSchema = new mongoose.Schema({
   },
 });
 
-// Create a unique index to ensure no employee can work for multiple cafes
 employeeSchema.index({ cafe: 1, email_address: 1 }, { unique: true });
 
-// Middleware hook that checks if employee already exists for the specified cafe
 employeeSchema.pre('save', async function (next) {
     const existingEmployee = await this.constructor.findOne({
       cafe: this.cafe,
