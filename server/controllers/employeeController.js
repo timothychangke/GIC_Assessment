@@ -61,3 +61,67 @@ export const createEmployee = async (req, res) => {
     return res.status(500).json({ message: 'Server error' });
   }
 };
+
+export const updateEmployee = async (req, res) => {
+  const { id, cafe, ...updates } = req.body;
+  if (!id) {
+    return res.status(400).json({ message: 'Employee ID is required.' });
+  }
+
+  try {
+    let employee = await Employee.findById(id);
+    if (!employee) {
+      return res.status(404).json({ message: 'Employee not found.' });
+    }
+    const oldCafeId = employee.cafe;
+    if (cafe) {
+      const newCafe = await Cafe.findById(cafe);
+      if (!newCafe) {
+        return res.status(404).json({ message: 'Cafe not found.' });
+      }
+      if (oldCafeId !== cafe) {
+        newCafe.employeeCount += 1;
+        await newCafe.save(); 
+        if (oldCafeId) {
+          const oldCafe = await Cafe.findById(oldCafeId);
+          if (oldCafe) {
+            oldCafe.employeeCount -= 1;
+            await oldCafe.save(); 
+          }
+        }
+      }
+    }
+    employee = { ...employee.toObject(), ...updates };
+    await employee.save();
+    return res.status(200).json(employee);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const deleteEmployee = async (req, res) => {
+  const { id } = req.body; 
+  if (!id) {
+    return res.status(400).json({ message: 'Employee ID is required.' });
+  }
+  try {
+    const foundEmployee = await Employee.findOne({ id });
+    if (!foundEmployee) {
+      return res.status(404).json({ message: 'Employee not found.' });
+    }
+    const cafeId = foundEmployee.cafe; 
+    await Cafe.findById(cafeId, (err, cafe) => {
+      if (err || !cafe) {
+        return res.status(404).json({ message: 'Cafe not found.' });
+      }
+      cafe.employeeCount -= 1;
+      cafe.save(); 
+    });
+    await Employee.deleteOne({ id });
+    return res.status(200).json({ message: 'Employee deleted successfully.' });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Server error' });
+  }
+};

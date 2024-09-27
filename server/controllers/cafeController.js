@@ -51,23 +51,40 @@ export const createCafe = async (req, res) => {
   }
 };
 
-
 export const updateCafe = async (req, res) => {
   const { id } = req.body; 
   const updates = req.body; 
-
   if (!id) {
     return res.status(400).json({ message: 'Cafe ID is required.' });
   }
-
   try {
-    const cafe = await Cafe.findById(id);
+    let cafe = await Cafe.findById(id);
     if (!cafe) {
-      return res.status(404).json({ message: 'Café not found.' });
+      return res.status(404).json({ message: 'Cafe not found.' });
     }
-    Object.assign(cafe, updates); 
+    cafe = { ...cafe.toObject(), ...updates };
     await cafe.save();
     return res.status(200).json(cafe);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const deleteCafe = async (req, res) => {
+  const { name } = req.body; 
+  if (!name) {
+    return res.status(400).json({ message: 'Cafe name is required.' });
+  }
+
+  try {
+    const foundCafe = await Cafe.findOne({ name });
+    if (!foundCafe) {
+      return res.status(404).json({ message: 'Cafe not found.' });
+    }
+    await Employee.deleteMany({ cafe: foundCafe.id });
+    await Cafe.deleteOne({ id: foundCafe.id });
+    return res.status(200).json({ message: 'Cafe and associated employees deleted successfully.' });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Server error' });
