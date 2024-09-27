@@ -1,5 +1,6 @@
 import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
+import './cafeColumn.css';
 
 const getCafeColumnDefs = (handleEditClick) => [
   {
@@ -12,8 +13,13 @@ const getCafeColumnDefs = (handleEditClick) => [
         style={{ width: '50px', height: '50px' }}
       />
     ),
-    minWidth: 70, // Set a minimum width
-    flex: 1, // Allow this column to grow/shrink
+    minWidth: 70,
+    flex: 1,
+    cellStyle: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
   },
   {
     headerName: 'Name',
@@ -21,14 +27,18 @@ const getCafeColumnDefs = (handleEditClick) => [
     sortable: true,
     filter: true,
     floatingFilter: true,
-    minWidth: 100,
-    flex: 2, // This column takes up more space
+    minWidth: 300,
+    flex: 2,
+    cellStyle: { textAlign: 'center' },
+    headerStyle: { textAlign: 'center' },
   },
   {
     headerName: 'Description',
     field: 'description',
-    minWidth: 150,
+    minWidth: 300,
     flex: 3,
+    cellStyle: { textAlign: 'center' },
+    headerStyle: { textAlign: 'center' },
   },
   {
     headerName: 'Location',
@@ -36,15 +46,19 @@ const getCafeColumnDefs = (handleEditClick) => [
     sortable: true,
     filter: true,
     floatingFilter: true,
-    minWidth: 100,
+    minWidth: 300,
     flex: 2,
+    cellStyle: { textAlign: 'center' },
+    headerStyle: { textAlign: 'center' },
   },
   {
     headerName: 'Employees',
     field: 'employees',
     sortable: true,
-    minWidth: 100,
+    minWidth: 300,
     flex: 1,
+    cellStyle: { textAlign: 'center' },
+    headerStyle: { textAlign: 'center' },
   },
   {
     headerName: 'Actions',
@@ -58,8 +72,14 @@ const getCafeColumnDefs = (handleEditClick) => [
         <EditIcon />
       </IconButton>
     ),
-    minWidth: 80,
+    minWidth: 100,
     flex: 1,
+    cellStyle: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    headerStyle: { textAlign: 'center' },
   },
 ];
 
