@@ -1,4 +1,3 @@
-/* Navbar.css */
 .navbar {
   background-color: #ffffff; 
   color: #021d49;         
@@ -14,7 +13,13 @@
 }
 
 .logo {
-  font-size: 1.5rem;    
+  display: flex;          
+  align-items: center;    
+}
+
+.logo-image {
+  height: 100px;         
+  width: auto;           
 }
 
 .nav-links {
@@ -29,6 +34,7 @@
   padding: 0.5rem 1rem;  
   border-radius: 4px;    
   transition: background 0.3s; 
+  font-size: 1.5rem;      
 }
 
 .nav-link:hover {

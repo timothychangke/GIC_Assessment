@@ -6,7 +6,10 @@ const axiosInstance = axios.create({ baseURL: BASE_URL });
 export const getCafesByLocation = async () => {
   try {
     const response = await axiosInstance.get('/api/cafes');
-    return response.data;
+    const cafes = response.data
+    console.log(cafes)
+    const locations = [...new Set(cafes.map((cafe) => cafe.location))]
+    return {cafes, locations};
   } catch (error) {
     throw new Error(error.response?.data?.message || 'Error fetching cafes');
   }
