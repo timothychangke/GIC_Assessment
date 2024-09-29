@@ -14,8 +14,9 @@ export const getCafesByLocation = async (req, res) => {
       cafes = allCafes;
     }
     const cafeWithDescriptions = cafes.map((cafe) => {
-      const logoUrl = `${req.protocol}://${req.get('host')}/assets/img/${cafe.logo}`;
-      console.log(logoUrl);
+      const logoUrl = `${req.protocol}://${req.get('host')}/assets/img/${
+        cafe.logo
+      }`;
       return {
         name: cafe.name,
         description: cafe.description,
@@ -27,7 +28,6 @@ export const getCafesByLocation = async (req, res) => {
     });
     cafeWithDescriptions.sort((a, b) => b.employees - a.employees);
     const locations = [...new Set(allCafes.map((cafe) => cafe.location))];
-    console.log({ cafes: cafeWithDescriptions, locations });
     return res.status(200).json({ cafes: cafeWithDescriptions, locations });
   } catch (error) {
     console.error(error);
@@ -36,11 +36,7 @@ export const getCafesByLocation = async (req, res) => {
 };
 
 export const createCafe = async (req, res) => {
-  console.log(req.body);
-  console.log(req.file);
   const { name, description, location, logo, picturePath } = req.body;
-  console.log(logo)
-  console.log(picturePath)
   if (!name || !description || !location) {
     return res
       .status(400)
@@ -65,15 +61,17 @@ export const createCafe = async (req, res) => {
 export const updateCafe = async (req, res) => {
   const { id } = req.body;
   const updates = req.body;
+  console.log(updates);
   if (!id) {
     return res.status(400).json({ message: 'Cafe ID is required.' });
   }
   try {
-    let cafe = await Cafe.findById(id);
+    let cafe = await Cafe.findOne({ id });
     if (!cafe) {
       return res.status(404).json({ message: 'Cafe not found.' });
     }
-    cafe = { ...cafe.toObject(), ...updates };
+    const updatedCafe = { ...cafe.toObject(), ...updates };
+    cafe.set(updatedCafe);
     await cafe.save();
     return res.status(200).json(cafe);
   } catch (error) {

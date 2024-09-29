@@ -7,6 +7,9 @@ const FilteringBreadcrumbs = ({ values, handleClick, selectedLocation }) => {
   const handleLinkClick = async (index) => {
     await handleClick(values[index]);
   };
+  if (!selectedLocation) {
+    selectedLocation = 'All locations'
+  }
   return (
     <div role="presentation">
       <Breadcrumbs aria-label="breadcrumb">

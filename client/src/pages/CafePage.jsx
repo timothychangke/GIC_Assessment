@@ -14,6 +14,7 @@ const CafePage = () => {
     description: '',
     location: '',
     logo: null,
+    id: null
   });
 
   const { data, isLoading, isError } = useGetCafesByLocation(selectedLocation);
@@ -34,8 +35,9 @@ const CafePage = () => {
     setSelectedLocation(location === 'All locations' ? null : location);
   };
   const handleEditClick = (data) => {
-    const { name, description, location, logo } = data;
-    setCafe((prevCafe) => ({ ...prevCafe, name, description, location, logo }));
+    console.log(data)
+    const { name, description, location, logo, id } = data;
+    setCafe((prevCafe) => ({ ...prevCafe, name, description, location, logo, id }));
     setOpenDialog({open: true, type: 'edit'});
   };
   return (

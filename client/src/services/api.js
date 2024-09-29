@@ -7,8 +7,8 @@ export const getCafesByLocation = async (location) => {
   try {
     const url = location ? `/api/cafes?location=${location}` : '/api/cafes';
     const response = await axiosInstance.get(url);
-    const {cafes, locations} = response.data
-    return {cafes, locations};
+    const { cafes, locations } = response.data;
+    return { cafes, locations };
   } catch (error) {
     throw new Error(error.response?.data?.message || 'Error fetching cafes');
   }
@@ -20,5 +20,18 @@ export const createCafe = async (newCafe) => {
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.message || 'Error creating cafe');
+  }
+};
+
+export const updateCafe = async (updatedCafe) => {
+  try {
+    const { id: cafeId } = updatedCafe;
+    const response = await axiosInstance.put(
+      `api/cafe?location=${cafeId}`,
+      updatedCafe
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || 'Error editing cafe');
   }
 };

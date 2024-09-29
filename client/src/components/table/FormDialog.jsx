@@ -20,32 +20,43 @@ import {
 } from '@mui/icons-material';
 import FlexBox from '../UI/Flexbox';
 
-import { useCreateCafe } from '../../services/mutations';
+import { useCreateCafe, useUpdateCafe } from '../../services/mutations';
 
 const FormDialog = ({ open, setOpen, cafe, setCafe }) => {
   const [isImage, setIsImage] = useState(false);
 
   const createCafeMutation = useCreateCafe();
+  const updateCafeMutation = useUpdateCafe();
   const handleSubmit = async () => {
     try {
+      console.log(open.type)
       if (open.type === 'new') {
         const formData = new FormData();
         formData.append('name', cafe.name);
         formData.append('description', cafe.description);
         formData.append('location', cafe.location);
-
         if (cafe.logo) {
           formData.append('logo', cafe.logo);
           formData.append('picturePath', cafe.logo.name);
         }
-
-        // This is an asynchronous operation, so await it
         await createCafeMutation.mutateAsync(formData);
-
-        handleClose(); // Close the dialog/modal
-        resetForm(); // Reset the form state
+        handleClose(); 
+        resetForm(); 
       } else {
-        
+        console.log(cafe);
+        const updateData = {
+          id: cafe.id,
+          name: cafe.name,
+          description: cafe.description,
+          location: cafe.location,
+        };
+        if (cafe.logo) {
+          updateData.logo = cafe.logo;
+          updateData.picturePath = cafe.logo.name;
+        }
+        await updateCafeMutation.mutateAsync(updateData);
+        handleClose();
+        resetForm();
       }
     } catch (error) {
       console.error('Error creating cafe:', error); // Log the error for debugging
@@ -59,12 +70,12 @@ const FormDialog = ({ open, setOpen, cafe, setCafe }) => {
   };
 
   const handleClose = () => {
-    setOpen(() => ({ open: false, type: 'new' }));
+    setOpen((prevOpen) => ({ ...prevOpen, open: false }));
     resetForm();
   };
 
   const resetForm = () => {
-    setCafe({ name: '', description: '', location: '', logo: null });
+    setCafe({ name: '', description: '', location: '', logo: null, id: null });
     setIsImage(false);
   };
 
@@ -95,7 +106,7 @@ const FormDialog = ({ open, setOpen, cafe, setCafe }) => {
                 paddingBottom={'8px'}
                 margin="auto"
               >
-                Add a New Cafe
+                {open.type === 'new' ? 'Add a new Cafe' : 'Edit Cafe'}
               </Typography>
             </FlexBox>
             <Divider sx={{ margin: '0 0 1.25rem 0' }} />

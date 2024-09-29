@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createCafe } from './api.js';
+import { createCafe, updateCafe } from './api.js';
 
 export const useCreateCafe = () => {
   const queryClient = useQueryClient()
@@ -16,3 +16,19 @@ export const useCreateCafe = () => {
     },
   });
 };
+
+export const useUpdateCafe = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (updatedCafe) => updateCafe(updatedCafe),
+    onMutate: () => {},
+    onError: () => {},
+    onSettled: async (_, error, variables) => {
+      if (error) {
+        console.log(error)
+      } else {
+        await queryClient.invalidateQueries({queryKey: ['cafes']})
+      }
+    },
+  })
+}
