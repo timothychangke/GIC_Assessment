@@ -1,4 +1,5 @@
 import Cafe from '../models/Cafe.js';
+import Employee from '../models/Employee.js';
 
 export const getCafesByLocation = async (req, res) => {
   const { location } = req.query;
@@ -61,7 +62,6 @@ export const createCafe = async (req, res) => {
 export const updateCafe = async (req, res) => {
   const { id } = req.body;
   const updates = req.body;
-  console.log(updates);
   if (!id) {
     return res.status(400).json({ message: 'Cafe ID is required.' });
   }
@@ -81,13 +81,12 @@ export const updateCafe = async (req, res) => {
 };
 
 export const deleteCafe = async (req, res) => {
-  const { name } = req.body;
-  if (!name) {
-    return res.status(400).json({ message: 'Cafe name is required.' });
+  const { id } = req.params;
+  if (!id) {
+    return res.status(400).json({ message: 'Cafe ID is required.' });
   }
-
   try {
-    const foundCafe = await Cafe.findOne({ name });
+    const foundCafe = await Cafe.findOne({ id });
     if (!foundCafe) {
       return res.status(404).json({ message: 'Cafe not found.' });
     }

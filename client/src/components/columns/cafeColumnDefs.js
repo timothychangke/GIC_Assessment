@@ -1,8 +1,9 @@
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton } from '@mui/material';
 import './cafeColumn.css';
 
-const getCafeColumnDefs = (onEditClick) => [
+const getCafeColumnDefs = (onEditClick, onDeleteClick) => [
   {
     headerName: 'Logo',
     field: 'logo',
@@ -96,15 +97,26 @@ const getCafeColumnDefs = (onEditClick) => [
     headerName: 'Actions',
     field: 'actions',
     cellRenderer: (params) => (
-      <IconButton
-        color="#021d49"
-        aria-label="edit"
-        onClick={() => onEditClick(params.data)}
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '16px',
+        }}
       >
-        <EditIcon sx={{ color: '#021d49' }} />
-      </IconButton>
+        <IconButton aria-label="edit" onClick={() => onEditClick(params.data)}>
+          <EditIcon sx={{ color: '#021d49' }} />
+        </IconButton>
+        <IconButton
+          aria-label="delete"
+          onClick={() => onDeleteClick(params.data)}
+        >
+          <DeleteIcon sx={{ color: '#d32f2f' }} />
+        </IconButton>
+      </div>
     ),
-    minWidth: 100,
+    minWidth: 150, 
     flex: 1,
     cellStyle: {
       display: 'flex',

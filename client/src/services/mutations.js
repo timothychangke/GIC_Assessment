@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createCafe, updateCafe } from './api.js';
+import { createCafe, updateCafe, deleteCafe } from './api.js';
 
 export const useCreateCafe = () => {
   const queryClient = useQueryClient()
@@ -30,5 +30,22 @@ export const useUpdateCafe = () => {
         await queryClient.invalidateQueries({queryKey: ['cafes']})
       }
     },
+  })
+}
+
+export const useDeleteCafe = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (cafeId) => deleteCafe(cafeId), 
+    onSuccess: () => {
+      console.log('success')
+    }, 
+    onSettled: async (_, error) => {
+      if (error) {
+        console.log(error)
+      } else {
+        await queryClient.invalidateQueries({queryKey: ['cafes']})
+      }
+    }
   })
 }

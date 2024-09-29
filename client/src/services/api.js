@@ -27,11 +27,20 @@ export const updateCafe = async (updatedCafe) => {
   try {
     const { id: cafeId } = updatedCafe;
     const response = await axiosInstance.put(
-      `api/cafe?location=${cafeId}`,
+      `/api/cafe/${cafeId}`,
       updatedCafe
     );
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.message || 'Error editing cafe');
+  }
+};
+
+export const deleteCafe = async (cafeId) => {
+  try {
+    const response = await axiosInstance.delete(`/api/cafe/${cafeId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || 'Error deleting cafe');
   }
 };

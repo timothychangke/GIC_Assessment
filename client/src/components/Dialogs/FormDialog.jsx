@@ -24,12 +24,10 @@ import { useCreateCafe, useUpdateCafe } from '../../services/mutations';
 
 const FormDialog = ({ open, setOpen, cafe, setCafe }) => {
   const [isImage, setIsImage] = useState(false);
-
   const createCafeMutation = useCreateCafe();
   const updateCafeMutation = useUpdateCafe();
   const handleSubmit = async () => {
     try {
-      console.log(open.type)
       if (open.type === 'new') {
         const formData = new FormData();
         formData.append('name', cafe.name);
@@ -41,7 +39,6 @@ const FormDialog = ({ open, setOpen, cafe, setCafe }) => {
         }
         await createCafeMutation.mutateAsync(formData);
         handleClose(); 
-        resetForm(); 
       } else {
         console.log(cafe);
         const updateData = {
@@ -51,17 +48,13 @@ const FormDialog = ({ open, setOpen, cafe, setCafe }) => {
           location: cafe.location,
         };
         if (cafe.logo) {
-          updateData.logo = cafe.logo;
-          updateData.picturePath = cafe.logo.name;
+          updateData.logo = cafe.logo.name;
         }
         await updateCafeMutation.mutateAsync(updateData);
         handleClose();
-        resetForm();
       }
     } catch (error) {
-      console.error('Error creating cafe:', error); // Log the error for debugging
-      // Optionally, show an error message to the user
-      // e.g., setErrorMessage('Failed to create cafe. Please try again.');
+      console.error('Error creating cafe:', error);
     }
   };
 

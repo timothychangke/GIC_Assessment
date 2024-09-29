@@ -42,11 +42,11 @@ router.post('/cafe', upload.single('logo'), createCafe);
 router.post('/employee', createEmployee);
 
 // PUT methods
-router.put('/cafe', updateCafe);
+router.put('/cafe/:id', updateCafe);
 router.put('/employee', updateEmployee);
 
 // DELETE methods
-router.delete('/cafe', deleteCafe);
+router.delete('/cafe/:id', deleteCafe);
 router.delete('/employee', deleteEmployee);
 
 export default router;
