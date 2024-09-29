@@ -10,7 +10,7 @@ const Grid = ({ rowData, columnData }) => {
         columnDefs={columnData}
         pagination={true}
         paginationPageSize={10}
-        rowHeight={60}
+        rowHeight={100}
         domLayout="autoHeight"
       />
     </div>

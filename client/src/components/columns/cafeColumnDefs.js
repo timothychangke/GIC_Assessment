@@ -2,18 +2,21 @@ import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
 import './cafeColumn.css';
 
-const getCafeColumnDefs = (handleEditClick) => [
+const getCafeColumnDefs = (onEditClick) => [
   {
     headerName: 'Logo',
     field: 'logo',
-    cellRenderer: (params) => (
-      <img
-        src={params.value}
-        alt="Cafe Logo"
-        style={{ width: '50px', height: '50px' }}
-      />
-    ),
-    minWidth: 70,
+    cellRenderer: (params) => {
+      console.log(params.value);
+      return (
+        <img
+          src={params.value}
+          alt="Cafe Logo"
+          style={{ width: '100px', height: '100px', objectFit: 'contain' }}
+        />
+      );
+    },
+    minWidth: 200,
     flex: 1,
     cellStyle: {
       display: 'flex',
@@ -27,17 +30,34 @@ const getCafeColumnDefs = (handleEditClick) => [
     sortable: true,
     filter: true,
     floatingFilter: true,
-    minWidth: 300,
+    minWidth: 100,
     flex: 2,
-    cellStyle: { textAlign: 'center' },
-    headerStyle: { textAlign: 'center' },
+    cellStyle: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      fontWeight: 500,
+      fontSize: '18px',
+    },
+    headerStyle: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      textAlign: 'center',
+    },
   },
   {
     headerName: 'Description',
     field: 'description',
     minWidth: 300,
     flex: 3,
-    cellStyle: { textAlign: 'center' },
+    cellStyle: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      textAlign: 'center',
+      fontSize: '18px',
+    },
     headerStyle: { textAlign: 'center' },
   },
   {
@@ -48,7 +68,13 @@ const getCafeColumnDefs = (handleEditClick) => [
     floatingFilter: true,
     minWidth: 300,
     flex: 2,
-    cellStyle: { textAlign: 'center' },
+    cellStyle: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      textAlign: 'center',
+      fontSize: '18px',
+    },
     headerStyle: { textAlign: 'center' },
   },
   {
@@ -57,7 +83,13 @@ const getCafeColumnDefs = (handleEditClick) => [
     sortable: true,
     minWidth: 300,
     flex: 1,
-    cellStyle: { textAlign: 'center' },
+    cellStyle: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      textAlign: 'center',
+      fontSize: '18px',
+    },
     headerStyle: { textAlign: 'center' },
   },
   {
@@ -65,11 +97,11 @@ const getCafeColumnDefs = (handleEditClick) => [
     field: 'actions',
     cellRenderer: (params) => (
       <IconButton
-        color="primary"
+        color="#021d49"
         aria-label="edit"
-        onClick={() => handleEditClick(params.data)}
+        onClick={() => onEditClick(params.data)}
       >
-        <EditIcon />
+        <EditIcon sx={{ color: '#021d49' }} />
       </IconButton>
     ),
     minWidth: 100,

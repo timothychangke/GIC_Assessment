@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { getCafesByLocation } from './api.js';
 
-export const useGetCafesByLocation = () => {
+export const useGetCafesByLocation = (location = null) => {
   return useQuery({
-    queryKey: ['cafes'], 
-    queryFn: getCafesByLocation,
+    queryKey: ['cafes', location], 
+    queryFn: () => getCafesByLocation(location),
     refetchOnWindowFocus: false,
   });
 };
