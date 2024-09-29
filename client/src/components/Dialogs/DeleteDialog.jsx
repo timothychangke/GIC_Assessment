@@ -1,14 +1,17 @@
-import React from 'react';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Button from '@mui/material/Button';
+import FlexBox from '../UI/Flexbox';
+import { useDeleteCafe } from '../../services/mutation/cafeMutations';
 
-import { useDeleteCafe } from '../../services/mutations';
-
-const DeleteDialog = ({ open, setOpen, cafe, setCafe}) => {
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  Container,
+  Divider,
+  Button,
+  Typography,
+} from '@mui/material';
+const DeleteDialog = ({ open, setOpen, cafe, setCafe }) => {
   const deleteCafeMutation = useDeleteCafe();
   const handleClose = () => {
     setOpen(false);
@@ -29,12 +32,35 @@ const DeleteDialog = ({ open, setOpen, cafe, setCafe}) => {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        sx={{
+          '& .MuiDialog-paper': {
+            borderRadius: '16px',
+            padding: '8px',
+          },
+        }}
       >
-        <DialogTitle id="alert-dialog-title">{'Confirm Delete'}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Are you sure you want to delete this cafe?
-          </DialogContentText>
+          <Container>
+            <FlexBox width="100%">
+              <Typography
+                fontWeight="bold"
+                fontSize="28px"
+                color="#021d49"
+                paddingBottom={'8px'}
+                margin="auto"
+              >
+                Delete Cafe
+              </Typography>
+            </FlexBox>
+            <Divider sx={{ margin: '0 0 1.25rem 0' }} />
+            <FlexBox width="100%">
+              <DialogContentText id="alert-dialog-description">
+                Are you sure you want to delete this cafe? This action cannot be
+                undone.
+              </DialogContentText>
+            </FlexBox>
+            <Divider sx={{ margin: '0 1.25rem 0', paddingTop: '3rem' }} />
+          </Container>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

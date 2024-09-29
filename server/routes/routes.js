@@ -43,10 +43,10 @@ router.post('/employee', createEmployee);
 
 // PUT methods
 router.put('/cafe/:id', updateCafe);
-router.put('/employee', updateEmployee);
+router.put('/employee/:id', updateEmployee);
 
 // DELETE methods
 router.delete('/cafe/:id', deleteCafe);
-router.delete('/employee', deleteEmployee);
+router.delete('/employee/:id', deleteEmployee);
 
 export default router;

@@ -5,21 +5,29 @@ import calculateDaysWorked from '../helpers/calculateDaysWorked.js';
 export const getEmployeesByCafe = async (req, res) => {
   const { cafe } = req.query;
   try {
-    const employees = cafe
-      ? await Employee.find({ cafe }).populate('cafe')
-      : await Employee.find().populate('cafe');
-    const employeesWithDaysWorked = employees.map((employee) => {
-      return {
-        id: employee.id,
-        name: employee.name,
-        email_address: employee.email_address,
-        phone_number: employee.phone_number,
-        days_worked: calculateDaysWorked(employee.startDate),
-        cafe: employee.cafe ? employee.cafe.name : '',
-      };
-    });
+    let employees;
+    const allCafes = await Cafe.find();
+    if (cafe) {
+      employees = await Employee.find({ cafe });
+    } else {
+      employees = await Employee.find();
+    }
+    const employeesWithDaysWorked = employees.map(
+      ({ id, name, email_address, phone_number, start_date, cafe }) => ({
+        id,
+        name,
+        email_address,
+        phone_number,
+        days_worked: calculateDaysWorked(start_date),
+        cafe: cafe || '',
+      })
+    );
     employeesWithDaysWorked.sort((a, b) => b.days_worked - a.days_worked);
-    return res.status(200).json(employeesWithDaysWorked);
+    const uniqueCafes = [...new Set(allCafes.map((cafe) => cafe.name))];
+    return res.status(200).json({
+      employees: employeesWithDaysWorked,
+      cafes: uniqueCafes,
+    });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Server error' });
@@ -81,12 +89,12 @@ export const updateEmployee = async (req, res) => {
       }
       if (oldCafeId !== cafe) {
         newCafe.employeeCount += 1;
-        await newCafe.save(); 
+        await newCafe.save();
         if (oldCafeId) {
           const oldCafe = await Cafe.findById(oldCafeId);
           if (oldCafe) {
             oldCafe.employeeCount -= 1;
-            await oldCafe.save(); 
+            await oldCafe.save();
           }
         }
       }
@@ -101,7 +109,7 @@ export const updateEmployee = async (req, res) => {
 };
 
 export const deleteEmployee = async (req, res) => {
-  const { id } = req.body; 
+  const { id } = req.body;
   if (!id) {
     return res.status(400).json({ message: 'Employee ID is required.' });
   }
@@ -110,13 +118,13 @@ export const deleteEmployee = async (req, res) => {
     if (!foundEmployee) {
       return res.status(404).json({ message: 'Employee not found.' });
     }
-    const cafeId = foundEmployee.cafe; 
+    const cafeId = foundEmployee.cafe;
     await Cafe.findById(cafeId, (err, cafe) => {
       if (err || !cafe) {
         return res.status(404).json({ message: 'Cafe not found.' });
       }
       cafe.employeeCount -= 1;
-      cafe.save(); 
+      cafe.save();
     });
     await Employee.deleteOne({ id });
     return res.status(200).json({ message: 'Employee deleted successfully.' });

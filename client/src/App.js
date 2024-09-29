@@ -34,7 +34,7 @@ const cafesRoute = new Route({
 
 const employersRoute = new Route({
   getParentRoute: () => rootRoute,
-  path: '/employers',
+  path: '/employees',
   component: EmployeePage,
 });
 

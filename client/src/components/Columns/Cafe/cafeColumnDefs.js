@@ -1,7 +1,14 @@
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton } from '@mui/material';
-import './cafeColumn.css';
+import '../column.css';
+
+const centerStyle = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  textAlign: 'center',
+};
 
 const getCafeColumnDefs = (onEditClick, onDeleteClick) => [
   {
@@ -13,17 +20,13 @@ const getCafeColumnDefs = (onEditClick, onDeleteClick) => [
         <img
           src={params.value}
           alt="Cafe Logo"
-          style={{ width: '100px', height: '100px', objectFit: 'contain' }}
+          style={{ width: '150px', height: '150px', objectFit: 'contain' }}
         />
       );
     },
     minWidth: 200,
     flex: 1,
-    cellStyle: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
+    cellStyle: centerStyle,
   },
   {
     headerName: 'Name',
@@ -34,18 +37,11 @@ const getCafeColumnDefs = (onEditClick, onDeleteClick) => [
     minWidth: 100,
     flex: 2,
     cellStyle: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
+      ...centerStyle,
       fontWeight: 500,
       fontSize: '18px',
     },
-    headerStyle: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      textAlign: 'center',
-    },
+    headerStyle: centerStyle,
   },
   {
     headerName: 'Description',
@@ -53,13 +49,10 @@ const getCafeColumnDefs = (onEditClick, onDeleteClick) => [
     minWidth: 300,
     flex: 3,
     cellStyle: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      textAlign: 'center',
+      ...centerStyle,
       fontSize: '18px',
     },
-    headerStyle: { textAlign: 'center' },
+    headerStyle: centerStyle,
   },
   {
     headerName: 'Location',
@@ -70,13 +63,10 @@ const getCafeColumnDefs = (onEditClick, onDeleteClick) => [
     minWidth: 300,
     flex: 2,
     cellStyle: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      textAlign: 'center',
+      ...centerStyle,
       fontSize: '18px',
     },
-    headerStyle: { textAlign: 'center' },
+    headerStyle: centerStyle,
   },
   {
     headerName: 'Employees',
@@ -85,10 +75,7 @@ const getCafeColumnDefs = (onEditClick, onDeleteClick) => [
     minWidth: 300,
     flex: 1,
     cellStyle: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      textAlign: 'center',
+      ...centerStyle,
       fontSize: '18px',
     },
     headerStyle: { textAlign: 'center' },
@@ -102,28 +89,24 @@ const getCafeColumnDefs = (onEditClick, onDeleteClick) => [
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          gap: '16px',
+          gap: '2rem',
         }}
       >
         <IconButton aria-label="edit" onClick={() => onEditClick(params.data)}>
-          <EditIcon sx={{ color: '#021d49' }} />
+          <EditIcon sx={{ color: '#021d49', fontSize: '2rem' }} />
         </IconButton>
         <IconButton
           aria-label="delete"
           onClick={() => onDeleteClick(params.data)}
         >
-          <DeleteIcon sx={{ color: '#d32f2f' }} />
+          <DeleteIcon sx={{ color: '#d32f2f', fontSize: '2rem' }} />
         </IconButton>
       </div>
     ),
-    minWidth: 150, 
+    minWidth: 150,
     flex: 1,
-    cellStyle: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    headerStyle: { textAlign: 'center' },
+    cellStyle: centerStyle,
+    headerStyle: centerStyle,
   },
 ];
 

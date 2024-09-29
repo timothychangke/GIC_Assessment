@@ -5,6 +5,13 @@ import logo from '../../assets/images/afe-14.png';
 
 const Navbar = () => {
   const { pathname } = useLocation();
+
+  const navItems = [
+    { path: '/', label: 'Home' },
+    { path: '/cafes', label: 'Cafes' },
+    { path: '/employees', label: 'Employees' },
+  ];
+
   return (
     <nav className="navbar">
       <div className="nav-container">
@@ -12,32 +19,16 @@ const Navbar = () => {
           <img src={logo} alt="Web Application Logo" className="logo-image" />
         </Link>
         <ul className="nav-links">
-          <li>
-            <Link
-              to="/"
-              className={`nav-link ${pathname === '/' ? 'active' : ''}`}
-            >
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/cafes"
-              className={`nav-link ${pathname === '/cafes' ? 'active' : ''}`}
-            >
-              Cafes
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/employees"
-              className={`nav-link ${
-                pathname === '/employees' ? 'active' : ''
-              }`}
-            >
-              Employees
-            </Link>
-          </li>
+          {navItems.map(({ path, label }) => (
+            <li key={path}>
+              <Link
+                to={path}
+                className={`nav-link ${pathname === path ? 'active' : ''}`}
+              >
+                {label}
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
     </nav>

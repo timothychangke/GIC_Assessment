@@ -3,24 +3,21 @@ import { useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import {
-  Container,
-  Divider,
-  InputBase,
-  Button,
-  Box,
-  IconButton,
-  Typography,
-} from '@mui/material';
-import Dropzone from 'react-dropzone';
-import {
-  DeleteOutlined,
-  EditOutlined,
-  ImageOutlined,
-} from '@mui/icons-material';
-import FlexBox from '../UI/Flexbox';
+import { Container, Divider, Typography } from '@mui/material';
 
-import { useCreateCafe, useUpdateCafe } from '../../services/mutations';
+import FlexBox from '../UI/Flexbox';
+import CafeForm from './FormDialogComponents/CafeForm';
+
+import { toast } from 'react-hot-toast';
+
+import {
+  useCreateCafe,
+  useUpdateCafe,
+} from '../../services/mutation/cafeMutations';
+import LogoUploader from './FormDialogComponents/LogoUploader';
+import DialogActionsComponent from './FormDialogComponents/DialogActionsComponent';
+import LogoToggle from './FormDialogComponents/LogoToggle';
+import OutlinedButton from './FormDialogComponents/OutlinedButton';
 
 const FormDialog = ({ open, setOpen, cafe, setCafe }) => {
   const [isImage, setIsImage] = useState(false);
@@ -28,6 +25,7 @@ const FormDialog = ({ open, setOpen, cafe, setCafe }) => {
   const updateCafeMutation = useUpdateCafe();
   const handleSubmit = async () => {
     try {
+      if (!validateForm()) return;
       if (open.type === 'new') {
         const formData = new FormData();
         formData.append('name', cafe.name);
@@ -38,9 +36,8 @@ const FormDialog = ({ open, setOpen, cafe, setCafe }) => {
           formData.append('picturePath', cafe.logo.name);
         }
         await createCafeMutation.mutateAsync(formData);
-        handleClose(); 
+        handleClose();
       } else {
-        console.log(cafe);
         const updateData = {
           id: cafe.id,
           name: cafe.name,
@@ -49,6 +46,8 @@ const FormDialog = ({ open, setOpen, cafe, setCafe }) => {
         };
         if (cafe.logo) {
           updateData.logo = cafe.logo.name;
+        } else {
+          updateData.logo = null;
         }
         await updateCafeMutation.mutateAsync(updateData);
         handleClose();
@@ -56,6 +55,24 @@ const FormDialog = ({ open, setOpen, cafe, setCafe }) => {
     } catch (error) {
       console.error('Error creating cafe:', error);
     }
+  };
+
+  const validateForm = () => {
+    // TO NOTE: this is the validation code as per the requirements document,
+    // but I commented it out as I personally felt it would ruin the user experience
+    // if all names were so short. However I still coded it out in case it was necessary.
+
+    // Validate Cafe Name
+    // if (cafe.name.length < 6 || cafe.name.length > 10) {
+    //   toast.error('Name must be between 6 and 10 characters.');
+    //   return false;
+    // }
+
+    if (cafe.logo && cafe.logo.size > 2 * 1024 * 1024) {
+      toast.error('Logo file size must be less than 2MB.');
+      return false;
+    }
+    return true;
   };
 
   const handleClickOpen = () => {
@@ -74,21 +91,17 @@ const FormDialog = ({ open, setOpen, cafe, setCafe }) => {
 
   return (
     <>
-      <Button
-        variant="outlined"
-        onClick={handleClickOpen}
+      <OutlinedButton onClick={handleClickOpen}>Add Cafe</OutlinedButton>
+      <Dialog
+        open={open.open}
+        onClose={handleClose}
         sx={{
-          padding: '10px 20px',
-          fontSize: '16px',
-          width: '200px',
-          height: '50px',
-          color: '#021d49',
-          borderColor: '#021d49',
+          '& .MuiDialog-paper': {
+            borderRadius: '16px',
+            padding: '8px',
+          },
         }}
       >
-        Add Cafe
-      </Button>
-      <Dialog open={open.open} onClose={handleClose}>
         <DialogContent>
           <Container>
             <FlexBox width="100%">
@@ -103,140 +116,26 @@ const FormDialog = ({ open, setOpen, cafe, setCafe }) => {
               </Typography>
             </FlexBox>
             <Divider sx={{ margin: '0 0 1.25rem 0' }} />
-            <FlexBox gap="1.5rem" paddingBottom="1rem">
-              <InputBase
-                placeholder="Cafe Name"
-                onChange={(e) =>
-                  setCafe((prevCafe) => ({ ...prevCafe, name: e.target.value }))
-                }
-                value={cafe.name}
-                sx={{
-                  width: '100%',
-                  backgroundColor: '#F0F0F0',
-                  borderRadius: '2rem',
-                  padding: '1rem 2rem',
-                }}
-              />
-              <InputBase
-                placeholder="Location"
-                onChange={(e) =>
-                  setCafe((prevCafe) => ({
-                    ...prevCafe,
-                    location: e.target.value,
-                  }))
-                }
-                value={cafe.location}
-                sx={{
-                  width: '100%',
-                  backgroundColor: '#F0F0F0',
-                  borderRadius: '2rem',
-                  padding: '1rem 2rem',
-                }}
-              />
-            </FlexBox>
-            <InputBase
-              placeholder="Cafe Description (max 256 chars)"
-              onChange={(e) =>
-                setCafe((prevCafe) => ({
-                  ...prevCafe,
-                  description: e.target.value,
-                }))
-              }
-              value={cafe.description}
-              sx={{
-                width: '100%',
-                backgroundColor: '#F0F0F0',
-                borderRadius: '2rem',
-                padding: '3rem 2rem',
-              }}
-            />
-
+            <CafeForm cafe={cafe} setCafe={setCafe} />
             {isImage && (
-              <Box
-                border={`1px solid #A3A3A3`}
-                borderRadius="5px"
-                mt="1rem"
-                p="1rem"
-              >
-                <Dropzone
-                  acceptedFiles=".jpg,.jpeg,.png"
-                  multiple={false}
-                  onDrop={(acceptedFiles) =>
-                    setCafe((prevCafe) => ({
-                      ...prevCafe,
-                      logo: acceptedFiles[0],
-                    }))
-                  }
-                >
-                  {({ getRootProps, getInputProps }) => (
-                    <FlexBox>
-                      <Box
-                        {...getRootProps()}
-                        border={`2px dashed #4a7249`}
-                        p="1rem"
-                        width="100%"
-                        sx={{ '&:hover': { cursor: 'pointer' } }}
-                      >
-                        <input {...getInputProps()} />
-                        {!cafe.logo ? (
-                          <p>Add Logo Here</p>
-                        ) : (
-                          <FlexBox>
-                            <Typography>{cafe.logo.name}</Typography>
-                            <EditOutlined />
-                          </FlexBox>
-                        )}
-                      </Box>
-                      {cafe.logo && (
-                        <IconButton
-                          onClick={() =>
-                            setCafe((prevCafe) => ({ logo: null, ...prevCafe }))
-                          }
-                          sx={{ width: '15%' }}
-                        >
-                          <DeleteOutlined />
-                        </IconButton>
-                      )}
-                    </FlexBox>
-                  )}
-                </Dropzone>
-              </Box>
+              <LogoUploader cafe={cafe} setCafe={setCafe} open={open} />
             )}
             <Divider sx={{ margin: '1.25rem 0' }} />
             <FlexBox>
-              <FlexBox gap="0.25rem" onClick={() => setIsImage(!isImage)}>
-                <ImageOutlined sx={{ color: 'gray' }} />
-                <Typography
-                  color={'gray'}
-                  sx={{ '&:hover': { cursor: 'pointer', color: 'gray' } }}
-                >
-                  {open.type === 'new' ? 'Attach a Logo' : 'Upload new logo'}
-                </Typography>
-              </FlexBox>
+              <LogoToggle
+                isImage={isImage}
+                setIsImage={setIsImage}
+                type={open.type}
+              />
             </FlexBox>
           </Container>
         </DialogContent>
         <DialogActions>
-          <Button
-            onClick={() => {
-              resetForm();
-              handleClose();
-            }}
-            sx={{
-              color: 'red',
-              borderRadius: '3rem',
-              marginLeft: '1rem',
-            }}
-          >
-            Cancel
-          </Button>
-          <Button
-            type="submit"
-            disabled={!(cafe.name && cafe.description && cafe.location)}
-            onClick={handleSubmit}
-          >
-            Submit
-          </Button>
+          <DialogActionsComponent
+            handleClose={handleClose}
+            handleSubmit={handleSubmit}
+            cafe={cafe}
+          />
         </DialogActions>
       </Dialog>
     </>

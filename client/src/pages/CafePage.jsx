@@ -1,10 +1,11 @@
 import { useState } from 'react';
 
-import CafeGrid from '../components/CafeGrid';
-import FilteringBreadcrumbs from '../components/Table/BreadCrumbs';
+import CafeGrid from '../components/Table/Cafe/CafeGrid';
+import FilteringBreadcrumbs from '../components/Table/TableComponents/BreadCrumbs';
 import FormDialog from '../components/Dialogs/FormDialog';
-import { useGetCafesByLocation } from '../services/queries';
+import { useGetCafesByLocation } from '../services/queries/cafeQueries';
 import DeleteDialog from '../components/Dialogs/DeleteDialog';
+import LoadingSpinner from '../components/State/Loading';
 
 const CafePage = () => {
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -20,9 +21,9 @@ const CafePage = () => {
 
   const { data, isLoading, isError } = useGetCafesByLocation(selectedLocation);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  // if (isLoading) {
+  //   return <LoadingSpinner />;
+  // }
 
   if (isError) {
     return <div>Error fetching cafes</div>;
@@ -37,6 +38,7 @@ const CafePage = () => {
   };
   const handleEditClick = (data) => {
     const { name, description, location, logo, id } = data;
+    console.log(data);
     setCafe((prevCafe) => ({
       ...prevCafe,
       name,

@@ -60,7 +60,7 @@ export const createCafe = async (req, res) => {
 };
 
 export const updateCafe = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
   const updates = req.body;
   if (!id) {
     return res.status(400).json({ message: 'Cafe ID is required.' });
@@ -100,33 +100,3 @@ export const deleteCafe = async (req, res) => {
     return res.status(500).json({ message: 'Server error' });
   }
 };
-
-// TODO: Get logos from mongodb
-// import { gfs } from '../config/db.js';
-
-// const getCafeLogoUrl = async (filename) => {
-//   return new Promise((resolve, reject) => {
-//     gfs.files.findOne({ filename }, (err, file) => {
-//       if (!file || file.length === 0) {
-//         return resolve(null);
-//       }
-//       const readStream = gfs.createReadStream(file.filename);
-//       const url = `http://<your_server_url>/api/cafe/image/${file.filename}`;
-//       resolve(url);
-//     });
-//   });
-// };
-
-// export const getCafeImage = (req, res) => {
-//   gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
-//     if (!file || file.length === 0) {
-//       return res.status(404).json({ message: 'File not found' });
-//     }
-//     if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
-//       const readstream = gfs.createReadStream(file.filename);
-//       readstream.pipe(res);
-//     } else {
-//       res.status(404).json({ message: 'Not an image' });
-//     }
-//   });
-// };
