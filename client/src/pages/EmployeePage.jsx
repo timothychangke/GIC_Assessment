@@ -2,6 +2,7 @@ import { useState } from 'react';
 import FilterSelect from '../components/Dialogs/FormDialogComponents/FilterSelect';
 import EmployeeGrid from '../components/Table/Employee/EmployeeGrid';
 import { useGetEmployeesByCafe } from '../services/queries/employeeQueries';
+import Navbar from '../components/NavBar/Navbar';
 
 const EmployeePage = () => {
   const [selectedCafe, setSelectedCafe] = useState(null);
@@ -25,29 +26,31 @@ const EmployeePage = () => {
   const cafes = data?.cafes || [];
   const employees = data?.employees || [];
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        height: '60vh',
-        width: '100%',
-        position: 'relative',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <EmployeeGrid
-        employees={employees}
-        onEditClick={handleEditClick}
-        onDeleteClick={handleDeleteClick}
-      />
-      <FilterSelect
-        cafes={cafes}
-        selectedCafe={selectedCafe}
-        onSelectCafe={handleSelectCafe}
-      />
-    </div>
+    <>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          height: '60vh',
+          width: '100%',
+          position: 'relative',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <EmployeeGrid
+          employees={employees}
+          onEditClick={handleEditClick}
+          onDeleteClick={handleDeleteClick}
+        />
+        <FilterSelect
+          cafes={cafes}
+          selectedCafe={selectedCafe}
+          onSelectCafe={handleSelectCafe}
+        />
+      </div>
+    </>
   );
 };
 

@@ -9,8 +9,8 @@ import {
   Route,
   Outlet,
 } from '@tanstack/react-router';
+import './index.css';
 
-// Define the root route
 const rootRoute = new RootRoute({
   component: () => (
     <>
