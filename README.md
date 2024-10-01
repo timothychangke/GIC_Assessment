@@ -66,7 +66,7 @@ GICafe Café Employee Manager is a Full Stack Mobile Responsive web application 
 
 1. Clone the repository:
    ```
-   git clone [https://github.com/your-username/cafe-employee-manager.git](https://github.com/timothychangke/GIC_Assessment.git)
+   git clone https://github.com/your-username/cafe-employee-manager.git
    cd GIC
    ```
 
