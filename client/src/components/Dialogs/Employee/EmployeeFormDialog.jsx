@@ -26,15 +26,14 @@ const FormDialog = ({ open, setOpen, employee, setEmployee, cafes }) => {
     try {
       if (!validateForm()) return;
       if (open.type === 'new') {
-        const date = employee.start_date === '' ? dayjs() : employee.start_date;
-
+        console.log(employee.start_date)
         const formData = new FormData();
         formData.append('name', employee.name || '');
         formData.append('email_address', employee.email_address || '');
         formData.append('phone_number', employee.phone_number || '');
         formData.append('gender', employee.gender || '');
         formData.append('cafe', employee.cafe || '');
-        formData.append('start_date', dayjs(date).format('YYYY-MM-DD'));
+        formData.append('start_date', employee.start_date);
         await createEmployeeMutation.mutateAsync(formData);
         handleClose();
       } else {

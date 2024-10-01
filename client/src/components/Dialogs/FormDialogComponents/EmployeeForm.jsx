@@ -66,7 +66,7 @@ const EmployeeForm = ({ employee, setEmployee, cafes, setDialogHeight }) => {
 
   useEffect(() => {
     if (isDropdownOpen) {
-      setDialogHeight(`55%`);
+      setDialogHeight(`58%`);
     } else {
       setDialogHeight('auto');
     }

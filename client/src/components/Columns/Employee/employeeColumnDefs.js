@@ -91,6 +91,11 @@ const getEmployeeColumnDefs = (onEditClick, onDeleteClick) => [
     headerStyle: centerStyle,
   },
   {
+    headerName: 'Start Date',
+    field: 'start_date', 
+    hide: true, 
+  },
+  {
     headerName: 'Days Worked',
     field: 'days_worked',
     sortable: true,
@@ -128,7 +133,13 @@ const getEmployeeColumnDefs = (onEditClick, onDeleteClick) => [
           gap: '2rem',
         }}
       >
-        <IconButton aria-label="edit" onClick={() => onEditClick(params.data)}>
+        <IconButton
+          aria-label="edit"
+          onClick={() => {
+            console.log(params.data);
+            onEditClick(params.data);
+          }}
+        >
           <EditIcon sx={{ color: '#021d49', fontSize: '2rem' }} />
         </IconButton>
         <IconButton

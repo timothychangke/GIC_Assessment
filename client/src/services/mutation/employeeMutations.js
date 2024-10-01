@@ -13,7 +13,7 @@ export const useCreateEmployee = () => {
     onMutate: () => {},
     onError: (error) => {
       console.log(error);
-      toast.error('Failed to create employee.');
+      toast.error(`Failed to create employee\n ${error}`);
     },
     onSuccess: () => {
       toast.success('Employee created successfully!');
@@ -31,7 +31,7 @@ export const useUpdateEmployee = () => {
     onMutate: () => {},
     onError: (error) => {
       console.log(error);
-      toast.error('Failed to update employee.');
+      toast.error(`Failed to update employee\n ${error}`);
     },
     onSuccess: () => {
       toast.success('Employee updated successfully!');
@@ -48,7 +48,7 @@ export const useDeleteEmployee = () => {
     mutationFn: (employeeId) => deleteEmployee(employeeId),
     onError: (error) => {
       console.log(error);
-      toast.error('Failed to delete employee.');
+      toast.error(`Failed to delete employee\n ${error}`);
     },
     onSuccess: () => {
       toast.success('Employee deleted successfully!');

@@ -12,7 +12,7 @@ const FilterSelect = ({ cafes, selectedCafe, onSelectCafe }) => {
   }
 
   return (
-    <FlexBox>
+    <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
       <Typography variant="h6" sx={{ color: '#021d49' }}>
         Filter Employee By:
       </Typography>
@@ -38,7 +38,7 @@ const FilterSelect = ({ cafes, selectedCafe, onSelectCafe }) => {
           ))}
         </Select>
       </FormControl>
-    </FlexBox>
+    </div>
   );
 };
 

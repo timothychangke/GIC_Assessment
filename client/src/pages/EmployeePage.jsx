@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import FilterSelect from '../components/Dialogs/FormDialogComponents/FilterSelect';
 import EmployeeGrid from '../components/Table/Employee/EmployeeGrid';
 import { useGetEmployeesByCafe } from '../services/queries/employeeQueries';
 import LoadingSpinner from '../components/State/Loading';
 import EmployeeFormDialog from '../components/Dialogs/Employee/EmployeeFormDialog';
 import DeleteDialog from '../components/Dialogs/Employee/EmployeeDeleteDialog';
+import dayjs from 'dayjs';
+import FilterSelect from '../components/Dialogs/FormDialogComponents/FilterSelect';
 
 const EmployeePage = () => {
   const [selectedCafe, setSelectedCafe] = useState(null);
@@ -27,7 +28,8 @@ const EmployeePage = () => {
   //   id: null,
   // });
   const handleEditClick = (data) => {
-    const { id, name, email_address, phone_number, gender, cafe, start_date } = data;
+    const { id, name, email_address, phone_number, gender, cafe, start_date } =
+      data;
     setEmployee((prevEmployee) => ({
       ...prevEmployee,
       id,
@@ -36,12 +38,13 @@ const EmployeePage = () => {
       phone_number,
       gender,
       cafe,
-      start_date
+      start_date: dayjs(start_date),
     }));
     setOpenDialog({ open: true, type: 'edit' });
   };
   const handleDeleteClick = (data) => {
-    const { id, name, email_address, phone_number, gender, cafe, start_date } = data;
+    const { id, name, email_address, phone_number, gender, cafe, start_date } =
+      data;
     setEmployee((prevEmployee) => ({
       ...prevEmployee,
       id,
@@ -50,7 +53,7 @@ const EmployeePage = () => {
       phone_number,
       gender,
       cafe,
-      start_date
+      start_date,
     }));
     setOpenDeleteDialog(true);
   };
@@ -75,17 +78,24 @@ const EmployeePage = () => {
   const cafes = data?.cafes || [];
   const employees = data?.employees || [];
   return (
-    <>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        width: '100%',
+        height: '100%',
+      }}
+    >
       <div
         style={{
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'flex-start',
-          height: '60vh',
+          alignItems: 'center',
           width: '100%',
+          height: '100%',
           position: 'relative',
           justifyContent: 'center',
-          alignItems: 'center',
         }}
       >
         <div
@@ -116,14 +126,12 @@ const EmployeePage = () => {
           employees={employees}
           onEditClick={handleEditClick}
           onDeleteClick={handleDeleteClick}
-        />
-        <FilterSelect
           cafes={cafes}
           selectedCafe={selectedCafe}
-          onSelectCafe={handleSelectCafe}
+          handleSelectCafe={handleSelectCafe}
         />
       </div>
-    </>
+    </div>
   );
 };
 

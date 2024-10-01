@@ -21,7 +21,7 @@ export const getCafesByLocation = async (req, res) => {
       return {
         name: cafe.name,
         description: cafe.description,
-        employees: cafe.employeeCount,
+        employeeCount: cafe.employeeCount,
         logo: logoUrl,
         location: cafe.location,
         id: cafe.id,
@@ -29,6 +29,7 @@ export const getCafesByLocation = async (req, res) => {
     });
     cafeWithDescriptions.sort((a, b) => b.employees - a.employees);
     const locations = [...new Set(allCafes.map((cafe) => cafe.location))];
+    console.log(cafeWithDescriptions)
     return res.status(200).json({ cafes: cafeWithDescriptions, locations });
   } catch (error) {
     console.error(error);

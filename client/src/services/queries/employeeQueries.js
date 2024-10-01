@@ -8,4 +8,3 @@ export const useGetEmployeesByCafe = (cafe = null) => {
     refetchOnWindowFocus: false,
   });
 };
-

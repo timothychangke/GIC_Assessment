@@ -10,9 +10,10 @@ export default function BasicDatePicker({
   handleDateChange,
   setIsDropdownOpen,
 }) {
+  console.log(value)
   if (value === '') {
     value = dayjs();
-  }
+  } 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['DatePicker']}>

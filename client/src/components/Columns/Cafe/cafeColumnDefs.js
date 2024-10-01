@@ -70,7 +70,7 @@ const getCafeColumnDefs = (onEditClick, onDeleteClick) => [
   },
   {
     headerName: 'Employees',
-    field: 'employees',
+    field: 'employeeCount',
     sortable: true,
     minWidth: 300,
     flex: 1,

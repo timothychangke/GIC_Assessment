@@ -29,10 +29,12 @@ export const getEmployeesByCafe = async (req, res) => {
         gender,
         days_worked: calculateDaysWorked(start_date),
         cafe,
+        start_date,
       })
     );
     employeesWithDaysWorked.sort((a, b) => b.days_worked - a.days_worked);
     const uniqueCafes = [...new Set(allCafes.map((cafe) => cafe.name))];
+    console.log(uniqueCafes)
     return res.status(200).json({
       employees: employeesWithDaysWorked,
       cafes: uniqueCafes,
@@ -54,18 +56,24 @@ export const createEmployee = async (req, res) => {
     !cafe ||
     !start_date
   ) {
-    console.log(name);
-    console.log(email_address);
-    console.log(phone_number);
-    console.log(gender);
-    console.log(cafe);
-    console.log(start_date);
     return res.status(400).json({ message: 'All fields are required.' });
   }
   try {
     const foundCafe = await Cafe.findOne({ name: cafe });
     if (!foundCafe) {
       return res.status(404).json({ message: 'Cafe not found.' });
+    }
+    const existingEmployee = await Employee.findOne({
+      $or: [{ email_address }, { phone_number }],
+    });
+
+    if (existingEmployee) {
+      return res
+        .status(409)
+        .json({
+          message:
+            'An employee with this email address or phone number already exists.',
+        });
     }
     const newEmployee = new Employee({
       name,
