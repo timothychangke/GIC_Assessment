@@ -1,5 +1,19 @@
 # ☕️ GICafe Café Employee Manager 
 
+<div style="display: flex; justify-content: space-between;">
+
+  <div style="flex: 0 0 48%; display: flex; flex-direction: column;">
+    <img width="48%" alt="image" src="https://github.com/user-attachments/assets/72358869-1b00-49ef-bfdf-868b39812a10" style="margin-bottom: 10px;">
+    <img width="48%" alt="image" src="https://github.com/user-attachments/assets/61bfdbd9-e6cf-4266-ae58-205e2b089282" style="margin-bottom: 10px;">
+  </div>
+
+  <div style="flex: 0 0 48%; display: flex; flex-direction: column;">
+    <img width="48%" alt="image" src="https://github.com/user-attachments/assets/e4996cb3-f94c-495f-af24-2c6573e3642c">
+    <img width="48%" alt="image" src="https://github.com/user-attachments/assets/7ce72528-7d41-4aa8-8144-f6e3c39caf6e">
+  </div>
+
+</div>
+
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [Tech Stack](#tech-stack)
@@ -18,23 +32,8 @@
 11. [What I Have Learned](#what-i-have-learned)
 12. [Known Issues](#known-issues)
 
+
 ## Introduction
-
-<div style="display: flex; justify-content: space-between;">
-
-  <div style="flex: 0 0 48%; display: flex; flex-direction: column;">
-    <img width="48%" alt="image" src="https://github.com/user-attachments/assets/72358869-1b00-49ef-bfdf-868b39812a10" style="margin-bottom: 10px;">
-    <img width="48%" alt="image" src="https://github.com/user-attachments/assets/61bfdbd9-e6cf-4266-ae58-205e2b089282" style="margin-bottom: 10px;">
-  </div>
-
-  <div style="flex: 0 0 48%; display: flex; flex-direction: column;">
-    <img width="48%" alt="image" src="https://github.com/user-attachments/assets/e4996cb3-f94c-495f-af24-2c6573e3642c">
-    <img width="48%" alt="image" src="https://github.com/user-attachments/assets/7ce72528-7d41-4aa8-8144-f6e3c39caf6e">
-  </div>
-
-</div>
-
-
 GICafe Café Employee Manager is a Full Stack Mobile Responsive web application designed to manage cafés and their employees. It provides a user-friendly interface for viewing, adding, editing, and deleting both cafés and employees. The application is built with a React frontend and a Node.js backend, utilizing modern web technologies and best practices.
 
 **Hosted on:** [http://3.25.141.25:3000/](http://3.25.141.25:3000/)
