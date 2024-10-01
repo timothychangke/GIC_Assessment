@@ -9,9 +9,8 @@
 
   <div style="flex: 0 0 48%; display: flex; flex-direction: column;">
     <img width="48%" alt="image" src="https://github.com/user-attachments/assets/e4996cb3-f94c-495f-af24-2c6573e3642c">
-    <img width="48%" alt="image" src="https://github.com/user-attachments/assets/7ce72528-7d41-4aa8-8144-f6e3c39caf6e">
+    <img width="48%" alt="image" src="https://github.com/user-attachments/assets/862c9bb9-a60a-4edf-a598-ac7bc7a63750" >
   </div>
-
 
 
 </div>
