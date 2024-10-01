@@ -20,10 +20,14 @@
 
 ## Introduction
 
-<img width="1693" alt="image" src="https://github.com/user-attachments/assets/72358869-1b00-49ef-bfdf-868b39812a10">
-<img width="1696" alt="image" src="https://github.com/user-attachments/assets/e4996cb3-f94c-495f-af24-2c6573e3642c">
-<img width="1710" alt="image" src="https://github.com/user-attachments/assets/61bfdbd9-e6cf-4266-ae58-205e2b089282">
-<img width="1710" alt="image" src="https://github.com/user-attachments/assets/7ce72528-7d41-4aa8-8144-f6e3c39caf6e">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+
+  <img width="800" alt="image" src="https://github.com/user-attachments/assets/72358869-1b00-49ef-bfdf-868b39812a10" style="margin-bottom: 10px;">
+  <img width="800" alt="image" src="https://github.com/user-attachments/assets/e4996cb3-f94c-495f-af24-2c6573e3642c" style="margin-bottom: 10px;">
+  <img width="800" alt="image" src="https://github.com/user-attachments/assets/61bfdbd9-e6cf-4266-ae58-205e2b089282" style="margin-bottom: 10px;">
+  <img width="800" alt="image" src="https://github.com/user-attachments/assets/7ce72528-7d41-4aa8-8144-f6e3c39caf6e" style="margin-bottom: 10px;">
+
+</div>
 
 
 GICafe Café Employee Manager is a Full Stack Mobile Responsive web application designed to manage cafés and their employees. It provides a user-friendly interface for viewing, adding, editing, and deleting both cafés and employees. The application is built with a React frontend and a Node.js backend, utilizing modern web technologies and best practices.
