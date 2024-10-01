@@ -37,6 +37,7 @@ export const getCafesByLocation = async (req, res) => {
 };
 
 export const createCafe = async (req, res) => {
+  console.log(req.body)
   const { name, description, location, logo, picturePath } = req.body;
   if (!name || !description || !location) {
     return res

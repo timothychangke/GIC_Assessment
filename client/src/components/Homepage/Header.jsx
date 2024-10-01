@@ -15,7 +15,7 @@ const Header = () => {
           />
         </div>
 
-        <p className="text-blue-950 text-xl md:text-2xl mb-8 max-w-2xl mx-auto -mt-10 md:-mt-12 relative z-10">
+        <p className="text-blue-950 text-xl md:text-2xl mb-16 max-w-2xl mx-auto -mt-10 md:-mt-12 relative z-10">
           Are you ready to streamline and optimise your cafe operations with our
           powerful, intuitive management solution
         </p>

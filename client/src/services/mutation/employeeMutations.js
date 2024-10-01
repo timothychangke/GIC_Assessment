@@ -3,13 +3,13 @@ import {
   createEmployee,
   updateEmployee,
   deleteEmployee,
-} from '../api/employeeApi';
+} from '../api/employeeApi.js';
 import { toast } from 'react-hot-toast';
 
 export const useCreateEmployee = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (newEmployee) => createEmployee(newEmployee),
+    mutationFn: (newEmployee) =>  createEmployee(newEmployee),
     onMutate: () => {},
     onError: (error) => {
       console.log(error);

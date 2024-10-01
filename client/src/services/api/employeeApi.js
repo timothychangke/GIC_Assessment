@@ -16,9 +16,11 @@ export const getEmployeesByCafe = async (cafe) => {
   }
 };
 
-export const createEmployee = async (employee) => {
+export const createEmployee = async (newEmployee) => {
   try {
-    const response = await axiosInstance.post('api/employee', employee);
+    // TODO
+    const newEmployeeObj = Object.fromEntries(newEmployee.entries());
+    const response = await axiosInstance.post('/api/employee', newEmployeeObj);
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.message || 'Error creating employee');
@@ -28,6 +30,7 @@ export const createEmployee = async (employee) => {
 export const updateEmployee = async (updatedEmployee) => {
   try {
     const { id: employeeId } = updatedEmployee;
+    console.log(updatedEmployee);
     const response = await axiosInstance.put(
       `/api/employee/${employeeId}`,
       updatedEmployee

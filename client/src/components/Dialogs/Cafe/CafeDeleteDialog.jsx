@@ -1,5 +1,5 @@
-import FlexBox from '../UI/Flexbox';
-import { useDeleteCafe } from '../../services/mutation/cafeMutations';
+import FlexBox from '../../UI/Flexbox';
+import { useDeleteCafe } from '../../../services/mutation/cafeMutations';
 
 import {
   Dialog,
@@ -11,7 +11,7 @@ import {
   Button,
   Typography,
 } from '@mui/material';
-const DeleteDialog = ({ open, setOpen, cafe, setCafe }) => {
+const CafeDeleteDialog = ({ open, setOpen, cafe, setCafe }) => {
   const deleteCafeMutation = useDeleteCafe();
   const handleClose = () => {
     setOpen(false);
@@ -75,4 +75,4 @@ const DeleteDialog = ({ open, setOpen, cafe, setCafe }) => {
   );
 };
 
-export default DeleteDialog;
+export default CafeDeleteDialog;

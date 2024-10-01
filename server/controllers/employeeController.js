@@ -13,13 +13,22 @@ export const getEmployeesByCafe = async (req, res) => {
       employees = await Employee.find();
     }
     const employeesWithDaysWorked = employees.map(
-      ({ id, name, email_address, phone_number, start_date, cafe }) => ({
+      ({
         id,
         name,
         email_address,
         phone_number,
+        start_date,
+        gender,
+        cafe,
+      }) => ({
+        id,
+        name,
+        email_address,
+        phone_number,
+        gender,
         days_worked: calculateDaysWorked(start_date),
-        cafe: cafe || '',
+        cafe,
       })
     );
     employeesWithDaysWorked.sort((a, b) => b.days_worked - a.days_worked);
@@ -29,7 +38,6 @@ export const getEmployeesByCafe = async (req, res) => {
       cafes: uniqueCafes,
     });
   } catch (error) {
-    console.error(error);
     return res.status(500).json({ message: 'Server error' });
   }
 };
@@ -37,6 +45,7 @@ export const getEmployeesByCafe = async (req, res) => {
 export const createEmployee = async (req, res) => {
   const { name, email_address, phone_number, gender, cafe, start_date } =
     req.body;
+  console.log(req.body);
   if (
     !name ||
     !email_address ||
@@ -45,10 +54,16 @@ export const createEmployee = async (req, res) => {
     !cafe ||
     !start_date
   ) {
+    console.log(name);
+    console.log(email_address);
+    console.log(phone_number);
+    console.log(gender);
+    console.log(cafe);
+    console.log(start_date);
     return res.status(400).json({ message: 'All fields are required.' });
   }
   try {
-    const foundCafe = await Cafe.findOne({ name: cafeName });
+    const foundCafe = await Cafe.findOne({ name: cafe });
     if (!foundCafe) {
       return res.status(404).json({ message: 'Cafe not found.' });
     }
@@ -72,26 +87,27 @@ export const createEmployee = async (req, res) => {
 
 export const updateEmployee = async (req, res) => {
   const { id, cafe, ...updates } = req.body;
+  console.log(req.body);
   if (!id) {
     return res.status(400).json({ message: 'Employee ID is required.' });
   }
 
   try {
-    let employee = await Employee.findById(id);
+    let employee = await Employee.findOne({ id });
     if (!employee) {
       return res.status(404).json({ message: 'Employee not found.' });
     }
-    const oldCafeId = employee.cafe;
+    const oldCafeName = employee.cafe;
     if (cafe) {
-      const newCafe = await Cafe.findById(cafe);
+      const newCafe = await Cafe.findOne({ name: cafe });
       if (!newCafe) {
         return res.status(404).json({ message: 'Cafe not found.' });
       }
-      if (oldCafeId !== cafe) {
+      if (oldCafeName !== cafe) {
         newCafe.employeeCount += 1;
         await newCafe.save();
-        if (oldCafeId) {
-          const oldCafe = await Cafe.findById(oldCafeId);
+        if (oldCafeName) {
+          const oldCafe = await Cafe.findOne({ name: oldCafeName });
           if (oldCafe) {
             oldCafe.employeeCount -= 1;
             await oldCafe.save();
@@ -99,7 +115,8 @@ export const updateEmployee = async (req, res) => {
         }
       }
     }
-    employee = { ...employee.toObject(), ...updates };
+    const updatedEmployee = { ...employee.toObject(), ...updates, cafe };
+    employee.set(updatedEmployee);
     await employee.save();
     return res.status(200).json(employee);
   } catch (error) {
@@ -109,7 +126,7 @@ export const updateEmployee = async (req, res) => {
 };
 
 export const deleteEmployee = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
   if (!id) {
     return res.status(400).json({ message: 'Employee ID is required.' });
   }
@@ -118,14 +135,13 @@ export const deleteEmployee = async (req, res) => {
     if (!foundEmployee) {
       return res.status(404).json({ message: 'Employee not found.' });
     }
-    const cafeId = foundEmployee.cafe;
-    await Cafe.findById(cafeId, (err, cafe) => {
-      if (err || !cafe) {
-        return res.status(404).json({ message: 'Cafe not found.' });
-      }
-      cafe.employeeCount -= 1;
-      cafe.save();
-    });
+    const cafeName = foundEmployee.cafe;
+    const cafe = await Cafe.findOne({ name: cafeName });
+    if (!cafe) {
+      return res.status(404).json({ message: 'Cafe not found.' });
+    }
+    cafe.employeeCount -= 1;
+    await cafe.save();
     await Employee.deleteOne({ id });
     return res.status(200).json({ message: 'Employee deleted successfully.' });
   } catch (error) {

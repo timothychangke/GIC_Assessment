@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@mui/material';
 
-const DialogActionsComponent = ({ handleClose, handleSubmit, cafe }) => (
+const CafeDialogActionsComponent = ({ handleClose, handleSubmit, cafe }) => (
   <>
     <Button
       onClick={handleClose}
@@ -23,4 +23,4 @@ const DialogActionsComponent = ({ handleClose, handleSubmit, cafe }) => (
   </>
 );
 
-export default DialogActionsComponent;
+export default CafeDialogActionsComponent;

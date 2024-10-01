@@ -3,6 +3,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton } from '@mui/material';
 import '../column.css';
 
+import MaleIcon from '@mui/icons-material/Male';
+import FemaleIcon from '@mui/icons-material/Female';
+
 const centerStyle = {
   display: 'flex',
   justifyContent: 'center',
@@ -11,6 +14,24 @@ const centerStyle = {
 };
 
 const getEmployeeColumnDefs = (onEditClick, onDeleteClick) => [
+  {
+    headerName: 'Gender',
+    field: 'gender',
+    cellRenderer: (params) => {
+      return (
+        <div style={centerStyle}>
+          {params.value === 'Male' ? (
+            <MaleIcon sx={{ color: '#021d49', fontSize: '2rem' }} />
+          ) : (
+            <FemaleIcon sx={{ color: '#d32f2f', fontSize: '2rem' }} />
+          )}
+        </div>
+      );
+    },
+    minWidth: 150,
+    flex: 0.5,
+    headerStyle: centerStyle,
+  },
   {
     headerName: 'Employee ID',
     field: 'id',
@@ -82,7 +103,7 @@ const getEmployeeColumnDefs = (onEditClick, onDeleteClick) => [
     headerStyle: centerStyle,
   },
   {
-    headerName: 'Café Name',
+    headerName: 'Cafe Name',
     field: 'cafe',
     sortable: true,
     filter: true,
