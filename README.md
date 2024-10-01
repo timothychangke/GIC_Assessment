@@ -141,7 +141,7 @@ To stop the containers:
 docker-compose down
 ```
 
-## Database Seeding 🌱
+## 🌱 Database Seeding 
 
 To seed the database with initial data:
 
