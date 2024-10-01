@@ -1,6 +1,6 @@
 import getEmployeeColumnDefs from '../../Columns/Employee/employeeColumnDefs';
 import Grid from '../TableComponents/Grid';
-import FilterSelect from '../../Dialogs/FormDialogComponents/FilterSelect'
+import FilterSelect from '../../Dialogs/DialogComponents/FilterSelect';
 
 const EmployeeGrid = ({
   employees,
@@ -22,12 +22,12 @@ const EmployeeGrid = ({
         pageSize={15}
       />
       <div style={{ marginTop: '320px', width: '400px' }}>
-          <FilterSelect
-            cafes={cafes}
-            selectedCafe={selectedCafe}
-            onSelectCafe={handleSelectCafe}
-          />
-        </div>
+        <FilterSelect
+          cafes={cafes}
+          selectedCafe={selectedCafe}
+          onSelectCafe={handleSelectCafe}
+        />
+      </div>
     </>
   );
 };

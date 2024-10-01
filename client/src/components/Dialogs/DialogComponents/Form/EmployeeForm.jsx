@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import TextBox from '../../UI/TextBox';
-import FlexBox from '../../UI/Flexbox';
+import { useState, useEffect } from 'react';
+
 import {
   FormControl,
   FormLabel,
@@ -13,6 +12,8 @@ import {
   Box,
 } from '@mui/material';
 
+import TextBox from '../../../UI/TextBox';
+import FlexBox from '../../../UI/Flexbox';
 import BasicDatePicker from './DatePicker';
 
 const EmployeeForm = ({ employee, setEmployee, cafes, setDialogHeight }) => {
@@ -56,7 +57,7 @@ const EmployeeForm = ({ employee, setEmployee, cafes, setDialogHeight }) => {
       ...prevEmployee,
       [field]: value,
     }));
-    console.log(employee)
+    console.log(employee);
     const error = validateField(field, value);
     setErrors((prevErrors) => ({
       ...prevErrors,

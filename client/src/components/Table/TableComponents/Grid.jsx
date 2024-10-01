@@ -12,6 +12,7 @@ const Grid = ({ rowData, columnData, rowHeight, pageSize }) => {
         paginationPageSize={pageSize}
         rowHeight={rowHeight}
         domLayout="autoHeight"
+        paginationPageSizeSelector={false} 
       />
     </div>
   );

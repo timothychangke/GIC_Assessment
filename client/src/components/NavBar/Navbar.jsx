@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from '@tanstack/react-router';
-import { useMediaQuery } from '@mui/material';
-import './Navbar.css';
-import logo from '../../assets/images/afe-15.png';
 
+import { useMediaQuery } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+
+import './Navbar.css';
+import logo from '../../assets/images/afe-15.png';
 
 const Navbar = () => {
   const { pathname } = useLocation();

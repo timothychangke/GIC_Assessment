@@ -44,20 +44,6 @@ const employeeSchema = new mongoose.Schema({
 
 employeeSchema.index({ cafe: 1, email_address: 1 }, { unique: true });
 
-// employeeSchema.pre('save', async function (next) {
-//     const existingEmployee = await this.constructor.findOne({
-//       cafe: this.cafe,
-//       email_address: this.email_address,
-//     });
-  
-//     if (existingEmployee) {
-//       const error = new Error('An employee cannot work for more than one cafe at the same time.');
-//       next(error);
-//     } else {
-//       next();
-//     }
-//   });
-
 const Employee = mongoose.model('Employee', employeeSchema);
 
 export default Employee

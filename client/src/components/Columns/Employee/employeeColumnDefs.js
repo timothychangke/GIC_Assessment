@@ -1,10 +1,10 @@
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton } from '@mui/material';
-import '../column.css';
-
 import MaleIcon from '@mui/icons-material/Male';
 import FemaleIcon from '@mui/icons-material/Female';
+
+import '../column.css';
 
 const centerStyle = {
   display: 'flex',

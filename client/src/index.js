@@ -4,6 +4,8 @@ import App from './App.js';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: 5 } },

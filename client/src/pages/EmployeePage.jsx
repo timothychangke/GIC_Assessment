@@ -1,11 +1,12 @@
 import { useState } from 'react';
+
+import dayjs from 'dayjs';
+
 import EmployeeGrid from '../components/Table/Employee/EmployeeGrid';
 import { useGetEmployeesByCafe } from '../services/queries/employeeQueries';
 import LoadingSpinner from '../components/State/Loading';
 import EmployeeFormDialog from '../components/Dialogs/Employee/EmployeeFormDialog';
 import DeleteDialog from '../components/Dialogs/Employee/EmployeeDeleteDialog';
-import dayjs from 'dayjs';
-import FilterSelect from '../components/Dialogs/FormDialogComponents/FilterSelect';
 
 const EmployeePage = () => {
   const [selectedCafe, setSelectedCafe] = useState(null);
@@ -105,6 +106,7 @@ const EmployeePage = () => {
             width: '90%',
             alignItems: 'center',
             marginBottom: '10px',
+            marginTop: '150px'
           }}
         >
           <div></div>

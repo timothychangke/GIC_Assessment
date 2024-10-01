@@ -4,20 +4,18 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import { Container, Divider, Typography } from '@mui/material';
-
-import FlexBox from '../../UI/Flexbox';
-import CafeForm from '../FormDialogComponents/CafeForm'
-
 import { toast } from 'react-hot-toast';
 
+import FlexBox from '../../UI/Flexbox';
+import CafeForm from '../DialogComponents/Form/CafeForm';
 import {
   useCreateCafe,
   useUpdateCafe,
 } from '../../../services/mutation/cafeMutations';
-import LogoUploader from '../FormDialogComponents/LogoUploader'
-import DialogActionsComponent from '../FormDialogComponents/CafeDialogActionsComponent';
-import LogoToggle from '../FormDialogComponents/LogoToggle';
-import OutlinedButton from '../FormDialogComponents/OutlinedButton';
+import LogoUploader from '../DialogComponents/Form/LogoUploader';
+import CafeDialogActionsComponent from '../DialogComponents/DialogActions/CafeDialogActionsComponent';
+import LogoToggle from '../DialogComponents/Form/LogoToggle';
+import OutlinedButton from '../DialogComponents/OutlinedButton';
 
 const FormDialog = ({ open, setOpen, cafe, setCafe }) => {
   const [isImage, setIsImage] = useState(false);
@@ -131,7 +129,7 @@ const FormDialog = ({ open, setOpen, cafe, setCafe }) => {
           </Container>
         </DialogContent>
         <DialogActions>
-          <DialogActionsComponent
+          <CafeDialogActionsComponent
             handleClose={handleClose}
             handleSubmit={handleSubmit}
             cafe={cafe}

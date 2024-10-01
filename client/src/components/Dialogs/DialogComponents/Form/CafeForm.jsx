@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import TextBox from '../../UI/TextBox';
-import FlexBox from '../../UI/Flexbox';
+import TextBox from '../../../UI/TextBox';
+import FlexBox from '../../../UI/Flexbox';
 
 const CafeForm = ({ cafe, setCafe }) => {
   const [errors, setErrors] = useState({

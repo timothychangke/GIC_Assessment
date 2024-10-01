@@ -7,7 +7,6 @@ import { useGetCafesByLocation } from '../services/queries/cafeQueries';
 import DeleteDialog from '../components/Dialogs/Cafe/CafeDeleteDialog';
 import LoadingSpinner from '../components/State/Loading';
 
-
 const CafePage = () => {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [openDialog, setOpenDialog] = useState({ open: false, type: 'new' });

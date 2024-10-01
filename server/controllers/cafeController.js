@@ -27,7 +27,7 @@ export const getCafesByLocation = async (req, res) => {
         id: cafe.id,
       };
     });
-    cafeWithDescriptions.sort((a, b) => b.employees - a.employees);
+    cafeWithDescriptions.sort((a, b) => b.employeeCount - a.employeeCount);
     const locations = [...new Set(allCafes.map((cafe) => cafe.location))];
     console.log(cafeWithDescriptions)
     return res.status(200).json({ cafes: cafeWithDescriptions, locations });
@@ -92,7 +92,7 @@ export const deleteCafe = async (req, res) => {
     if (!foundCafe) {
       return res.status(404).json({ message: 'Cafe not found.' });
     }
-    await Employee.deleteMany({ cafe: foundCafe.id });
+    await Employee.deleteMany({ cafe: foundCafe.name });
     await Cafe.deleteOne({ id: foundCafe.id });
     return res
       .status(200)

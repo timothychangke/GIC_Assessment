@@ -1,4 +1,3 @@
-import React from 'react';
 import { InputBase, Typography, Box } from '@mui/material';
 import { styled } from '@mui/system';
 

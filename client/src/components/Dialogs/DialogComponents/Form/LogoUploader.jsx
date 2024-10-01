@@ -3,7 +3,7 @@ import React from 'react';
 import Dropzone from 'react-dropzone';
 import { Box, IconButton, Typography, Divider } from '@mui/material';
 import { DeleteOutlined, EditOutlined } from '@mui/icons-material';
-import FlexBox from '../../UI/Flexbox';
+import FlexBox from '../../../UI/Flexbox';
 
 const LogoUploader = ({ cafe, setCafe, open }) => (
   <>

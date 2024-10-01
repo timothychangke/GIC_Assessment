@@ -4,19 +4,17 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import { Container, Divider, Typography } from '@mui/material';
-
-import FlexBox from '../../UI/Flexbox';
-
 import { toast } from 'react-hot-toast';
 import dayjs from 'dayjs';
 
+import FlexBox from '../../UI/Flexbox';
 import {
   useCreateEmployee,
   useUpdateEmployee,
 } from '../../../services/mutation/employeeMutations';
-import OutlinedButton from '../FormDialogComponents/OutlinedButton';
-import EmployeeForm from '../FormDialogComponents/EmployeeForm';
-import EmployeeDialogActionsComponent from '../FormDialogComponents/EmployeeDialogActionsComponents';
+import OutlinedButton from '../DialogComponents/OutlinedButton';
+import EmployeeForm from '../DialogComponents/Form/EmployeeForm';
+import EmployeeDialogActionsComponent from '../DialogComponents/DialogActions/EmployeeDialogActionsComponents';
 
 const FormDialog = ({ open, setOpen, employee, setEmployee, cafes }) => {
   const createEmployeeMutation = useCreateEmployee();
@@ -26,7 +24,7 @@ const FormDialog = ({ open, setOpen, employee, setEmployee, cafes }) => {
     try {
       if (!validateForm()) return;
       if (open.type === 'new') {
-        console.log(employee.start_date)
+        console.log(employee.start_date);
         const formData = new FormData();
         formData.append('name', employee.name || '');
         formData.append('email_address', employee.email_address || '');
@@ -66,14 +64,11 @@ const FormDialog = ({ open, setOpen, employee, setEmployee, cafes }) => {
     // }
 
     const emailPattern = /^\S+@\S+\.\S+$/;
-    // const emailPattern = /^.*$/
-
     if (!employee.email_address || !emailPattern.test(employee.email_address)) {
       toast.error('Please enter a valid email address.');
     }
 
     const phonePattern = /^(8|9)\d{7}$/;
-    // const phonePattern = /^.*$/
     if (!employee.phone_number || !phonePattern.test(employee.phone_number)) {
       toast.error(
         'Phone number must be a Singapore number starting with 8 or 9 and have 8 digits.'
@@ -83,6 +78,7 @@ const FormDialog = ({ open, setOpen, employee, setEmployee, cafes }) => {
   };
 
   const handleClickOpen = () => {
+    setEmployee((prevEmployee) => ({...prevEmployee, start_date: dayjs()}))
     setOpen(() => ({ open: true, type: 'new' }));
   };
 

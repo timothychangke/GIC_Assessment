@@ -1,5 +1,5 @@
 import React from 'react';
-import FlexBox from '../../UI/Flexbox';
+import FlexBox from '../../../UI/Flexbox';
 import { ImageOutlined } from '@mui/icons-material';
 import { Typography } from '@mui/material';
 

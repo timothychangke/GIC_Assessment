@@ -1,10 +1,8 @@
-import { useState } from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Typography } from '@mui/material';
-import FlexBox from '../../UI/Flexbox';
 
 const FilterSelect = ({ cafes, selectedCafe, onSelectCafe }) => {
   if (!selectedCafe) {
