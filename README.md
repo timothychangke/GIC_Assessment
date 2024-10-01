@@ -23,13 +23,13 @@
 <div style="display: flex; justify-content: space-between;">
 
   <div style="flex: 0 0 48%; display: flex; flex-direction: column;">
-    <img width="100%" alt="image" src="https://github.com/user-attachments/assets/72358869-1b00-49ef-bfdf-868b39812a10" style="margin-bottom: 10px;">
-    <img width="100%" alt="image" src="https://github.com/user-attachments/assets/e4996cb3-f94c-495f-af24-2c6573e3642c">
+    <img width="50%" alt="image" src="https://github.com/user-attachments/assets/72358869-1b00-49ef-bfdf-868b39812a10" style="margin-bottom: 10px;">
+    <img width="50%" alt="image" src="https://github.com/user-attachments/assets/e4996cb3-f94c-495f-af24-2c6573e3642c">
   </div>
 
   <div style="flex: 0 0 48%; display: flex; flex-direction: column;">
-    <img width="100%" alt="image" src="https://github.com/user-attachments/assets/61bfdbd9-e6cf-4266-ae58-205e2b089282" style="margin-bottom: 10px;">
-    <img width="100%" alt="image" src="https://github.com/user-attachments/assets/7ce72528-7d41-4aa8-8144-f6e3c39caf6e">
+    <img width="50%" alt="image" src="https://github.com/user-attachments/assets/61bfdbd9-e6cf-4266-ae58-205e2b089282" style="margin-bottom: 10px;">
+    <img width="50%" alt="image" src="https://github.com/user-attachments/assets/7ce72528-7d41-4aa8-8144-f6e3c39caf6e">
   </div>
 
 </div>
