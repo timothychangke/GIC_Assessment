@@ -66,19 +66,19 @@ GICafe Café Employee Manager is a Full Stack Mobile Responsive web application 
 
 1. Clone the repository:
    ```
-   git clone https://github.com/your-username/cafe-employee-manager.git
-   cd cafe-employee-manager
+   git clone [https://github.com/your-username/cafe-employee-manager.git](https://github.com/timothychangke/GIC_Assessment.git)
+   cd GIC
    ```
 
 2. Install backend dependencies:
    ```
-   cd backend
+   cd server
    npm install
    ```
 
 3. Install frontend dependencies:
    ```
-   cd ../frontend
+   cd ../client
    npm install
    ```
 
@@ -88,6 +88,8 @@ GICafe Café Employee Manager is a Full Stack Mobile Responsive web application 
    MONGODB_URI=your_mongodb_connection_string
    PORT=5000
    ```
+(though I know it is bad practice to upload a .env file, it did so anyways to ease your executation of the application)
+
 
 ## 🚀 Running the Application
 
@@ -95,13 +97,13 @@ GICafe Café Employee Manager is a Full Stack Mobile Responsive web application 
 
 1. Start the backend server:
    ```
-   cd backend
-   npm run dev
+   cd server
+   npm start
    ```
 
 2. In a new terminal, start the frontend development server:
    ```
-   cd frontend
+   cd client
    npm start
    ```
 
@@ -111,13 +113,13 @@ GICafe Café Employee Manager is a Full Stack Mobile Responsive web application 
 
 1. Build the frontend:
    ```
-   cd frontend
+   cd client
    npm run build
    ```
 
 2. Start the backend server (which will serve the frontend build):
    ```
-   cd ../backend
+   cd ../server
    npm start
    ```
 
@@ -202,7 +204,7 @@ For detailed request/response formats, please refer to the API documentation.
 ## Folder Structure 📂
 
 ```plaintext
-cafe-employee-management/
+GIC/
 │
 ├── client/
 │   ├── public/
